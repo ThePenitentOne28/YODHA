@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Onboarding | YODHA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SIMPLE NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-brand">YODHA</div>
+    </nav>
+
+    <!-- ONBOARDING CONTENT -->
+    <main class="page-content">
+
+        <h1 style="color:#f97316; font-size:40px;">Choose Your Target Exam</h1>
+        <p style="color:#cbd5f5; margin-bottom:30px;">
+            This helps us personalise your preparation
+        </p>
+
+        <div class="profile-card">
+
+            <form onsubmit="saveExam(event)">
+
+                <div class="edit-field">
+                    <label>Target Exam</label>
+                    <select id="targetExam" required>
+                        <option value="" disabled selected>Select an exam</option>
+                        <option value="CDS">CDS</option>
+                        <option disabled>AFCAT (Coming Soon)</option>
+                        <option disabled>NDA (Coming Soon)</option>
+                        <option disabled>INET (Coming Soon)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="secondary-btn">
+                    Continue to Dashboard
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <!-- SCRIPT -->
+    <script>
+        /* ---------- AUTO-SKIP ONBOARDING ---------- */
+        (function () {
+            const profile = JSON.parse(localStorage.getItem("yodhaProfile"));
+            if (profile && profile.exam) {
+                // Exam already selected → skip onboarding
+                window.location.href = "dashboard.html";
+            }
+        })();
+
+        /* ---------- SAVE EXAM ---------- */
+        function saveExam(event) {
+            event.preventDefault();
+
+            const exam = document.getElementById("targetExam").value;
+
+            const profile = JSON.parse(localStorage.getItem("yodhaProfile")) || {};
+            profile.exam = exam;
+
+            localStorage.setItem("yodhaProfile", JSON.stringify(profile));
+
+            window.location.href = "dashboard.html";
+        }
+    </script>
+
+</body>
+
+</html>

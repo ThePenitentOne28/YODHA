@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CDS Overview | YODHA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-brand">YODHA</div>
+
+        <ul class="nav-links">
+            <li class="nav-item"><a href="dashboard.html">Dashboard</a></li>
+            <li class="nav-item"><a href="cds.html">CDS Module</a></li>
+
+            <li class="profile-menu">
+                <button class="profile-icon" id="profileBtn">👤</button>
+                <div class="dropdown" id="profileDropdown">
+                    <a href="profile.html">Profile</a>
+                    <a href="index.html">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="page-content">
+        <!-- CDS SUB NAV -->
+        <div style="margin-bottom:22px; text-align:center;">
+            <a href="cds.html" class="secondary-btn">← CDS Home</a>
+            <a href="cds-overview.html" class="secondary-btn">Overview</a>
+            <a href="cds-gk.html" class="secondary-btn">GK</a>
+            <a href="cds-maths.html" class="secondary-btn">Maths</a>
+            <a href="cds-english.html" class="secondary-btn">English</a>
+        </div>
+
+
+        <h1 class="dashboard-title">CDS Examination Overview</h1>
+        <p class="dashboard-subtitle">
+            Understanding the exam before preparing for it
+        </p>
+
+        <!-- SECTION 1 -->
+        <div class="profile-card" style="margin-bottom:30px;">
+            <h3 class="highlight">What is CDS?</h3>
+            <p style="margin-top:10px; line-height:1.7; color:#cbd5f5;">
+                The Combined Defence Services (CDS) Examination is conducted by UPSC
+                to select officers for the Indian Armed Forces through a written
+                examination followed by SSB interview.
+            </p>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="profile-card" style="margin-bottom:30px;">
+            <h3 class="highlight">Exam Structure</h3>
+            <ul style="margin-top:12px; color:#cbd5f5; line-height:1.8;">
+                <li>Written Examination (Objective type)</li>
+                <li>SSB Interview (Personality & Intelligence)</li>
+                <li>Medical Examination</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="profile-card" style="margin-bottom:30px;">
+            <h3 class="highlight">Written Examination Papers</h3>
+            <ul style="margin-top:12px; color:#cbd5f5; line-height:1.8;">
+                <li>English – 100 marks</li>
+                <li>General Knowledge – 100 marks</li>
+                <li>Mathematics – 100 marks</li>
+            </ul>
+            <p style="margin-top:10px; font-size:14px; color:#94a3b8;">
+                (IMA / INA / AFA candidates appear for all three papers)
+            </p>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="profile-card">
+            <h3 class="highlight">Preparation Approach</h3>
+            <ul style="margin-top:12px; color:#cbd5f5; line-height:1.8;">
+                <li>Understand syllabus and exam trend</li>
+                <li>Build strong basics before speed</li>
+                <li>Practice questions consistently</li>
+                <li>Revise and analyse mistakes</li>
+            </ul>
+        </div>
+        <div style="margin-top:40px; text-align:center;">
+            <a href="cds.html" class="secondary-btn">← Back to CDS Module</a>
+        </div>
+
+
+    </main>
+
+    <!-- DROPDOWN SCRIPT -->
+    <script>
+        const profileBtn = document.getElementById("profileBtn");
+        const dropdown = document.getElementById("profileDropdown");
+
+        profileBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle("show");
+        });
+
+        document.addEventListener("click", () => {
+            dropdown.classList.remove("show");
+        });
+    </script>
+
+
+</body>
+
+</html>

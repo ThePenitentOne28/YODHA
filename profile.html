@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Profile | YODHA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-brand">YODHA</div>
+
+        <ul class="nav-links">
+            <li class="nav-item"><a href="dashboard.html">Dashboard</a></li>
+
+            <li class="profile-menu">
+                <button class="secondary-btn" onclick="editProfile()">Edit Profile</button>
+
+                <div class="dropdown" id="profileDropdown">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- PROFILE CONTENT -->
+    <main class="page-content">
+
+        <h1 class="profile-title">My Profile</h1>
+        <p class="profile-subtitle">Cadet information & preferences</p>
+
+        <div class="profile-card" id="profileView">
+
+            <div class="profile-row">
+                <span>Name</span>
+                <span id="viewName">Akshu</span>
+            </div>
+
+            <div class="profile-row">
+                <span>Email</span>
+                <span id="viewEmail">Loading...</span>
+            </div>
+
+            <div class="profile-row">
+                <span>Target Exam</span>
+                <span id="viewExam">CDS</span>
+            </div>
+
+            <div class="profile-row">
+                <span>Target Year</span>
+                <span id="viewYear">2027</span>
+            </div>
+
+        </div>
+
+        <div class="profile-card hidden" id="profileEdit">
+
+            <form onsubmit="saveProfile(event)">
+                <div class="edit-field">
+                    <label>Name</label>
+                    <input type="text" id="editName" required>
+                </div>
+
+                <div class="edit-field">
+                    <label>Target Exam</label>
+                    <select id="editExam" required>
+                        <option value="CDS">CDS</option>
+                        <option disabled>AFCAT (Coming Soon)</option>
+                        <option disabled>NDA (Coming Soon)</option>
+                        <option disabled>INET (Coming Soon)</option>
+                    </select>
+                </div>
+
+                <div class="edit-field">
+                    <label>Target Year</label>
+                    <input type="number" id="editYear" required>
+                </div>
+
+                <button type="submit" class="secondary-btn">Save Profile</button>
+            </form>
+
+        </div>
+
+        <div class="profile-actions">
+            <button class="secondary-btn" onclick="editProfile()">Edit Profile</button>
+            <a href="dashboard.html" class="secondary-btn">Back to Dashboard</a>
+        </div>
+
+    </main>
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const supabaseClient = supabase.createClient(
+            "https://buvmqkgurywfadapamjx.supabase.co",
+            "sb_publishable_5iQt2xlb0DXb8pcuXEdDAg_4GQp-VYQ"
+        );
+
+        /* ---------- LOAD USER FROM SUPABASE ---------- */
+        async function loadUser() {
+            const { data } = await supabaseClient.auth.getUser();
+
+            if (!data.user) {
+                window.location.href = "login.html";
+            } else {
+                document.getElementById("viewEmail").innerText = data.user.email;
+            }
+        }
+
+        loadUser();
+
+        /* ---------- LOAD LOCAL PROFILE DATA ---------- */
+        const savedProfile = JSON.parse(localStorage.getItem("yodhaProfile")) || {};
+
+        const name = savedProfile.name || "Akshu";
+        const exam = savedProfile.exam || "CDS";
+        const year = savedProfile.year || "2027";
+
+        document.getElementById("viewName").innerText = name;
+        document.getElementById("viewExam").innerText = exam;
+        document.getElementById("viewYear").innerText = year;
+
+        /* ---------- EDIT PROFILE ---------- */
+        function editProfile() {
+            document.getElementById("profileView").classList.add("hidden");
+            document.getElementById("profileEdit").classList.remove("hidden");
+
+            document.getElementById("editName").value = name;
+            document.getElementById("editExam").value = exam;
+            document.getElementById("editYear").value = year;
+        }
+
+        /* ---------- SAVE PROFILE ---------- */
+        function saveProfile(event) {
+            event.preventDefault();
+
+            const updatedProfile = {
+                name: document.getElementById("editName").value,
+                exam: document.getElementById("editExam").value,
+                year: document.getElementById("editYear").value
+            };
+
+            localStorage.setItem("yodhaProfile", JSON.stringify(updatedProfile));
+
+            document.getElementById("viewName").innerText = updatedProfile.name;
+            document.getElementById("viewExam").innerText = updatedProfile.exam;
+            document.getElementById("viewYear").innerText = updatedProfile.year;
+
+            document.getElementById("profileEdit").classList.add("hidden");
+            document.getElementById("profileView").classList.remove("hidden");
+        }
+
+        /* ---------- LOGOUT ---------- */
+        async function logout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CDS Preparation | YODHA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-brand">YODHA</div>
+
+        <ul class="nav-links">
+            <li class="nav-item"><a href="dashboard.html">Dashboard</a></li>
+
+            <li class="profile-menu">
+                <button class="profile-icon" id="profileBtn">👤</button>
+                <div class="dropdown" id="profileDropdown">
+                    <a href="profile.html">Profile</a>
+                    <a href="index.html">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- CDS CONTENT -->
+    <main class="page-content">
+
+        <h1 class="dashboard-title">CDS Preparation</h1>
+        <p class="dashboard-subtitle">
+            Structured roadmap for the CDS written examination
+        </p>
+
+        <div class="dashboard-hint">
+            Select a section to begin
+        </div>
+
+        <div class="dashboard-grid">
+
+            <!-- OVERVIEW -->
+            <a href="cds-overview.html" style="text-decoration:none; color:inherit;">
+                <div class="dash-card">
+                    <h3>📘 Overview</h3>
+                    <p class="card-desc">
+                        Exam pattern, papers, marks, and preparation approach.
+                    </p>
+                    <span class="card-action">Start Here →</span>
+                </div>
+            </a>
+
+            <!-- GK -->
+            <a href="cds-gk.html" style="text-decoration:none; color:inherit;">
+                <div class="dash-card">
+                    <h3>🌍 General Knowledge</h3>
+                    <p class="card-desc">
+                        History, Polity, Geography, Science & Current Affairs.
+                    </p>
+                    <span class="card-action">Open -></span>
+                </div>
+            </a>
+
+
+            <!-- MATHS -->
+            <a href="cds-maths.html" style="text-decoration:none; color:inherit;">
+                <div class="dash-card">
+                    <h3>📐 Mathematics</h3>
+                    <p class="card-desc">
+                        Arithmetic, Algebra, Trigonometry & Geometry.
+                    </p>
+                    <span class="card-action">Open -></span>
+                </div>
+            </a>
+
+
+            <!-- ENGLISH -->
+            <a href="cds-english.html" style="text-decoration:none; color:inherit;">
+                <div class="dash-card">
+                    <h3>📝 English</h3>
+                    <p class="card-desc">
+                        Grammar, vocabulary, comprehension & usage.
+                    </p>
+                    <span class="card-action">Open -></span>
+                </div>
+            </a>
+
+
+            <!-- STRATEGY -->
+            <div class="dash-card">
+                <h3>🎯 Strategy</h3>
+                <p class="card-desc">
+                    Time management, revision cycles & mock analysis.
+                </p>
+                <span class="card-action">Coming Soon</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- DROPDOWN JS -->
+    <script>
+        const profileBtn = document.getElementById("profileBtn");
+        const dropdown = document.getElementById("profileDropdown");
+
+        profileBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle("show");
+        });
+
+        document.addEventListener("click", () => {
+            dropdown.classList.remove("show");
+        });
+    </script>
+
+</body>
+
+</html>

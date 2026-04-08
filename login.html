@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login | YODHA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar auth-navbar">
+        <div class="nav-brand">YODHA</div>
+        <a href="index.html" class="auth-home">Home</a>
+    </nav>
+
+    <div class="page-content">
+        <div class="auth-box">
+            <h2>Login</h2>
+
+            <form id="loginForm">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+
+            <p id="loginStatus"></p>
+
+            <p class="auth-link">
+                Don't have an account?
+                <a href="signup.html">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const supabaseClient = supabase.createClient(
+            "https://buvmqkgurywfadapamjx.supabase.co",
+            "sb_publishable_5iQt2xlb0DXb8pcuXEdDAg_4GQp-VYQ"
+        );
+
+        const form = document.getElementById("loginForm");
+        const status = document.getElementById("loginStatus");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const { error } = await supabaseClient.auth.signInWithPassword({
+                email,
+                password
+            });
+
+            if (error) {
+                status.textContent = error.message;
+                status.style.color = "red";
+            } else {
+                window.location.href = "dashboard.html";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

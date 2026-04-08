@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | YODHA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-brand">YODHA</div>
+
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+
+            <li class="profile-menu">
+                <button class="profile-icon" id="profileBtn">👤</button>
+                <div class="dropdown" id="profileDropdown">
+                    <a href="profile.html">Profile</a>
+                    <a href="index.html">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- DASHBOARD CONTENT -->
+    <main class="page-content">
+
+        <!-- ORIENTATION -->
+        <h1 class="dashboard-title">Dashboard</h1>
+        <p class="dashboard-subtitle">
+            Preparing for <span class="highlight">CDS</span>
+        </p>
+
+        <p class="dashboard-hint">
+            Select a section to begin your preparation
+        </p>
+
+        <!-- PRIMARY MODULE -->
+        <div class="dashboard-grid">
+
+            <!-- CDS MAIN CARD -->
+            <a href="cds.html" style="text-decoration:none; color:inherit;">
+                <div class="dash-card">
+                    <h3>📘 CDS Preparation</h3>
+                    <p class="card-desc">
+                        Complete roadmap for CDS written examination.
+                    </p>
+                    <span class="card-action">Enter Module →</span>
+                </div>
+            </a>
+
+            <!-- FUTURE MODULES -->
+            <div class="dash-card">
+                <h3>🧠 SSB Guidance</h3>
+                <p class="card-desc">
+                    Psychology, GTO & interview preparation.
+                </p>
+                <span class="card-action">Coming Soon</span>
+            </div>
+
+            <div class="dash-card">
+                <h3>📝 Mock Tests</h3>
+                <p class="card-desc">
+                    Section-wise and full-length mock tests.
+                </p>
+                <span class="card-action">Coming Soon</span>
+            </div>
+
+            <div class="dash-card">
+                <h3>📊 Progress Tracker</h3>
+                <p class="card-desc">
+                    Track consistency, strengths, and improvement.
+                </p>
+                <span class="card-action">Coming Soon</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- DROPDOWN SCRIPT -->
+    <script>
+        const profileBtn = document.getElementById("profileBtn");
+        const dropdown = document.getElementById("profileDropdown");
+
+        profileBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle("show");
+        });
+
+        document.addEventListener("click", () => {
+            dropdown.classList.remove("show");
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const supabaseClient = supabase.createClient(
+            "https://buvmqkgurywfadapamjx.supabase.co",
+            "sb_publishable_5iQt2xlb0DXb8pcuXEdDAg_4GQp-VYQ"
+        );
+
+        (async () => {
+            const { data } = await supabaseClient.auth.getSession();
+
+            if (!data.session) {
+                window.location.href = "login.html";
+            }
+        })();
+    </script>
+</body>
+
+</html>
